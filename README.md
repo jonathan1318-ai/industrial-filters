@@ -14,11 +14,15 @@ Lucide icons).
 
 ```bash
 npm install
+cp .env.example .env.local   # fill in Resend keys to test the quote form
 npm run dev      # http://localhost:3000
 npm run lint
 npm run typecheck
 npm run build
 ```
+
+Without `.env.local`, the site runs fine but `/api/quote` returns a
+"not configured yet" error instead of sending email — see `.env.example`.
 
 Run lint, typecheck, and build (in that order) before considering any
 change done — see `CLAUDE.md`.

@@ -1,6 +1,6 @@
 # Roadmap
 
-## Phase 1 — Foundation (current)
+## Phase 1 — Foundation (done)
 
 - Project setup (Next.js, TypeScript, Tailwind, shadcn/ui, Framer Motion,
   Lucide, brand tokens)
@@ -9,24 +9,35 @@
 - Homepage
 - Responsive layout shell
 
-## Phase 2
+## Phase 2 — Content pages (done)
 
-- Products (categories + detail pages), Services, Industries
-- Sanity project setup + schemas (per `DATA.md`), or continue on local
-  placeholder data if Sanity credentials aren't available yet
-- Product search / category filtering
+- Products (categories + detail pages), Services, Industries — built on
+  `lib/content/` typed placeholder data shaped like `DATA.md`'s Sanity
+  schema. Sanity project setup itself (dataset, API tokens, Studio route,
+  swapping `lib/content/data.ts` for a real client) is still pending —
+  needs Sanity credentials.
+- Product search / category filtering (client-side, `/products`)
 - Blog (list + post)
 
-## Phase 3
+## Phase 3 — Forms & SEO infra (current)
 
-- Quote Form (Next.js route handler + Resend + validation + bot protection)
-- Contact page (email form, WhatsApp link, Google Maps embed)
-- `sitemap.ts`, `robots.ts`, `manifest.ts`, per-page metadata + JSON-LD
-- Privacy Policy / Terms pages
+- Quote Form: `app/api/quote/route.ts` + Resend, Zod validation, honeypot +
+  minimum-submit-time bot checks (no external CAPTCHA service — see
+  `SEO.md`/`.env.example`; needs `RESEND_API_KEY` etc. to actually send).
+  Used on both `/request-quote` and `/contact`.
+- Contact page: form, WhatsApp/address/phone placeholders (not live links —
+  see `PROJECT.md`), map placeholder pending a real address.
+- `app/sitemap.ts`, `app/robots.ts`, `app/manifest.ts` — done, using
+  `NEXT_PUBLIC_SITE_URL` (placeholder domain until set).
+- Still pending: per-page JSON-LD (Product/Organization/Breadcrumb —
+  blocked on real company facts per `SEO.md`), Privacy Policy / Terms real
+  copy (currently explicit placeholders pending legal review).
+- Subtle Framer Motion pass done early (see Phase 4) rather than deferred.
 
 ## Phase 4
 
-- Animation pass (Framer Motion, subtle only)
+- ~~Animation pass~~ — done in Phase 3 (`components/motion/FadeIn.tsx`,
+  `MotionConfig reducedMotion="user"` in `app/layout.tsx`).
 - Performance optimization (image sizing, font loading, bundle size)
 - Accessibility audit (WCAG AA — contrast, focus order, screen reader pass)
 - Testing (component/unit tests + Playwright smoke tests for nav, forms)

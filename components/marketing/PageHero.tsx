@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Container } from "@/components/layout/Container";
 
 export function PageHero({
@@ -12,19 +15,25 @@ export function PageHero({
   return (
     <div className="bg-primary">
       <Container className="py-16 sm:py-20">
-        {eyebrow && (
-          <p className="text-sm font-semibold uppercase tracking-wide text-secondary">
-            {eyebrow}
-          </p>
-        )}
-        <h1 className="mt-2 max-w-2xl text-4xl font-bold tracking-tight text-white sm:text-5xl">
-          {title}
-        </h1>
-        {description && (
-          <p className="mt-4 max-w-2xl text-lg text-primary-foreground/80">
-            {description}
-          </p>
-        )}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+        >
+          {eyebrow && (
+            <p className="text-sm font-semibold uppercase tracking-wide text-secondary">
+              {eyebrow}
+            </p>
+          )}
+          <h1 className="mt-2 max-w-2xl text-4xl font-bold tracking-tight text-white sm:text-5xl">
+            {title}
+          </h1>
+          {description && (
+            <p className="mt-4 max-w-2xl text-lg text-primary-foreground/80">
+              {description}
+            </p>
+          )}
+        </motion.div>
       </Container>
     </div>
   );

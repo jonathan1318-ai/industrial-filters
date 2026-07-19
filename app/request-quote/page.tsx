@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { PageHero } from "@/components/marketing/PageHero";
-import { Button } from "@/components/ui/button";
+import { QuoteForm } from "@/components/forms/QuoteForm";
+import { productCategories } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Request Quote",
@@ -16,20 +16,16 @@ export default function RequestQuotePage() {
       <PageHero
         eyebrow="Request Quote"
         title="Request a filtration quote"
-        description="Our quote form is being finalized."
+        description="Tell us about your application and we'll recommend the right filtration solution."
       />
       <section className="py-16 sm:py-24">
         <Container className="max-w-2xl">
-          <p className="text-muted-foreground">
-            In the meantime, reach out via the{" "}
-            <Link href="/contact" className="font-medium text-primary underline underline-offset-4">
-              Contact page
-            </Link>{" "}
-            and our team will follow up about your filtration requirements.
-          </p>
-          <Button className="mt-6" asChild>
-            <Link href="/contact">Go to Contact</Link>
-          </Button>
+          <QuoteForm
+            productOptions={productCategories.map(({ title, slug }) => ({
+              title,
+              slug,
+            }))}
+          />
         </Container>
       </section>
     </>

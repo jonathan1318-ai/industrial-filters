@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { MotionConfig } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -17,12 +19,18 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Firuta Tech Services | Industrial Filtration Solutions",
     template: "%s | Firuta Tech Services",
   },
   description:
     "Firuta Tech Services supplies industrial filtration systems for manufacturing, semiconductor, food & beverage, chemical, HVAC and water treatment facilities across Malaysia.",
+  openGraph: {
+    type: "website",
+    siteName: "Firuta Tech Services",
+    locale: "en_MY",
+  },
 };
 
 export default function RootLayout({
@@ -42,11 +50,13 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <Navbar />
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <MotionConfig reducedMotion="user">
+          <Navbar />
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </MotionConfig>
       </body>
     </html>
   );

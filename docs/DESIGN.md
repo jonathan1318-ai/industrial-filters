@@ -75,6 +75,12 @@ Subtle only: fade/slide-in on scroll (Framer Motion, `whileInView`), hover
 state transitions (150–200ms). No parallax, no auto-playing carousels, no
 attention-grabbing looping animation.
 
+Implemented via `components/motion/FadeIn.tsx` (scroll-triggered, animates
+once) and direct `motion.div` mount animations on `Hero` and `PageHero`.
+`app/layout.tsx` wraps the app in `<MotionConfig reducedMotion="user">`, so
+all of the above is automatically disabled for users with
+`prefers-reduced-motion` set — don't bypass this when adding new motion.
+
 ## Accessibility
 
 WCAG AA minimum: 4.5:1 text contrast (3:1 for large text/UI components),

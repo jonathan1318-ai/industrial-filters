@@ -14,10 +14,14 @@
 
 ## Core features
 
-- Quote form — submits to a Next.js route handler, sent via Resend, with
-  bot protection (Cloudflare Turnstile or equivalent) and basic server-side
-  validation (Zod).
-- Contact via email form, WhatsApp deep link, and embedded Google Maps.
+- Quote form (`components/forms/QuoteForm.tsx`) — submits to
+  `app/api/quote/route.ts`, sent via Resend, with server-side Zod
+  validation and honeypot + minimum-submit-time bot checks (see `SEO.md`
+  for why not an external CAPTCHA). Used on `/request-quote` and
+  `/contact`.
+- Contact page has the same form plus placeholder address/phone/WhatsApp
+  (not live links yet) and a map placeholder — real address needed for
+  both the Google Maps embed and a working WhatsApp deep link.
 - Fully responsive.
 - SEO: metadata, Open Graph, JSON-LD, sitemap.xml, robots.txt on every page
   (see `SEO.md`).
