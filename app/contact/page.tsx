@@ -3,6 +3,7 @@ import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { PageHero } from "@/components/marketing/PageHero";
 import { QuoteForm } from "@/components/forms/QuoteForm";
+import { contact, whatsappHref } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -21,25 +22,37 @@ export default function ContactPage() {
       <section className="py-16 sm:py-24">
         <Container className="grid gap-12 lg:grid-cols-2">
           <div>
-            {/* Placeholder contact details — see docs/PROJECT.md. Not
-                rendered as tel:/mailto:/wa.me links until real values are
-                provided. */}
+            {/* Phone/WhatsApp/email are real (a personal stand-in for the
+                official business contact — see docs/PROJECT.md) and
+                rendered as live links. Address is still an unconfirmed
+                placeholder, so it stays plain text. */}
             <ul className="space-y-4 text-muted-foreground">
               <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
-                <span>[ADDRESS, MALAYSIA]</span>
+                <span>{contact.address}</span>
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
-                <span>[PHONE]</span>
+                <a href={`tel:${contact.phone}`} className="hover:text-primary">
+                  {contact.phone}
+                </a>
               </li>
               <li className="flex items-start gap-3">
                 <MessageCircle className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
-                <span>[WHATSAPP NUMBER]</span>
+                <a
+                  href={whatsappHref(contact.whatsapp)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary"
+                >
+                  {contact.whatsapp}
+                </a>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
-                <span>[EMAIL]</span>
+                <a href={`mailto:${contact.email}`} className="hover:text-primary">
+                  {contact.email}
+                </a>
               </li>
             </ul>
 

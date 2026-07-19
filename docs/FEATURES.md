@@ -14,14 +14,15 @@
 
 ## Core features
 
-- Quote form (`components/forms/QuoteForm.tsx`) — submits to
-  `app/api/quote/route.ts`, sent via Resend, with server-side Zod
-  validation and honeypot + minimum-submit-time bot checks (see `SEO.md`
-  for why not an external CAPTCHA). Used on `/request-quote` and
-  `/contact`.
-- Contact page has the same form plus placeholder address/phone/WhatsApp
-  (not live links yet) and a map placeholder — real address needed for
-  both the Google Maps embed and a working WhatsApp deep link.
+- Quote form (`components/forms/QuoteForm.tsx`) — sends client-side via
+  EmailJS (free tier, no server route/secret), with Zod validation and
+  honeypot + minimum-submit-time bot checks (see `SEO.md` for setup and
+  why not an external CAPTCHA). Used on `/request-quote` and `/contact`.
+- Contact page has the same form plus a real email (`mailto:`) and
+  phone/WhatsApp (`tel:`/`wa.me`) — currently the site owner's personal
+  contact as a working stand-in, not yet official business contact info
+  (see `PROJECT.md`). Address and the Google Maps embed are still
+  placeholders pending a real business address.
 - Fully responsive.
 - SEO: metadata, Open Graph, JSON-LD, sitemap.xml, robots.txt on every page
   (see `SEO.md`).

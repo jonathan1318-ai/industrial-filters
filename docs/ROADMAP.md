@@ -21,12 +21,15 @@
 
 ## Phase 3 — Forms & SEO infra (done)
 
-- Quote Form: `app/api/quote/route.ts` + Resend, Zod validation, honeypot +
-  minimum-submit-time bot checks (no external CAPTCHA service — see
-  `SEO.md`/`.env.example`; needs `RESEND_API_KEY` etc. to actually send).
+- Quote Form: sends client-side via EmailJS (free tier, no server route or
+  secret — switched from an initial Resend/server-route design once a free
+  EmailJS account was available), Zod validation, honeypot +
+  minimum-submit-time bot checks (see `SEO.md`/`.env.example`; needs
+  `NEXT_PUBLIC_EMAILJS_*` vars + a dashboard template to actually send).
   Used on both `/request-quote` and `/contact`.
-- Contact page: form, WhatsApp/address/phone placeholders (not live links —
-  see `PROJECT.md`), map placeholder pending a real address.
+- Contact page: form, real email/phone/WhatsApp (the site owner's personal
+  contact, standing in for official business contact info — see
+  `PROJECT.md`), map placeholder pending a real business address.
 - `app/sitemap.ts`, `app/robots.ts`, `app/manifest.ts` — done, using
   `NEXT_PUBLIC_SITE_URL` (placeholder domain until set).
 - Still pending: per-page JSON-LD (Product/Organization/Breadcrumb —
@@ -65,8 +68,9 @@
 
 Confirm target host before starting (Vercel is the default fit for Next.js
 App Router). Needs, at minimum: a hosting account, the production domain
-for `NEXT_PUBLIC_SITE_URL`, and the Resend env vars from `.env.example` if
-the quote form should work at launch.
+for `NEXT_PUBLIC_SITE_URL`, and the EmailJS env vars from `.env.example`
+(plus the dashboard template — see `SEO.md`) if the quote form should
+work at launch.
 
 ## Explicitly out of scope for now
 

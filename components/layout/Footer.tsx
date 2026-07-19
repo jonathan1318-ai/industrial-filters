@@ -3,6 +3,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "@/components/layout/Logo";
 import { Separator } from "@/components/ui/separator";
 import { mainNav } from "@/lib/nav";
+import { contact } from "@/lib/contact";
 
 const industries = [
   "Manufacturing",
@@ -66,21 +67,26 @@ export function Footer() {
             <h2 className="text-sm font-semibold uppercase tracking-wide text-primary-foreground/60">
               Contact
             </h2>
-            {/* Placeholder contact details — not rendered as links until
-                real values replace PROJECT.md's [PLACEHOLDER]s, so we never
-                ship a dead tel:/mailto: link. */}
+            {/* Phone/email are real (a personal stand-in for the official
+                business contact — see docs/PROJECT.md) and rendered as
+                live links. Address is still an unconfirmed placeholder,
+                so it stays plain text rather than a dead link/map. */}
             <ul className="mt-4 space-y-3 text-sm text-primary-foreground/80">
               <li className="flex items-start gap-2">
                 <MapPin className="mt-0.5 size-4 shrink-0" aria-hidden />
-                <span>[ADDRESS, MALAYSIA]</span>
+                <span>{contact.address}</span>
               </li>
               <li className="flex items-start gap-2">
                 <Phone className="mt-0.5 size-4 shrink-0" aria-hidden />
-                <span>[PHONE]</span>
+                <a href={`tel:${contact.phone}`} className="hover:text-white">
+                  {contact.phone}
+                </a>
               </li>
               <li className="flex items-start gap-2">
                 <Mail className="mt-0.5 size-4 shrink-0" aria-hidden />
-                <span>[EMAIL]</span>
+                <a href={`mailto:${contact.email}`} className="hover:text-white">
+                  {contact.email}
+                </a>
               </li>
             </ul>
           </div>

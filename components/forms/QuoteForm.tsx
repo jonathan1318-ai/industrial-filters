@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import emailjs from "@emailjs/browser";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,7 +14,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { quoteFormSchema } from "@/lib/quote-schema";
+import { MIN_SUBMIT_TIME_MS, quoteFormSchema } from "@/lib/quote-schema";
+import { emailjsConfig, isEmailJsConfigured } from "@/lib/emailjs";
 
 type ProductOption = { title: string; slug: string };
 
@@ -63,27 +65,48 @@ export function QuoteForm({
     }
 
     setFieldErrors({});
+
+    // Honeypot filled in => bot. Submitted faster than a human could type
+    // => bot. Fail both silently as "success" so a bot can't distinguish
+    // "detected" from "accepted".
+    const tooFast = Date.now() - renderedAt < MIN_SUBMIT_TIME_MS;
+    if (parsed.data.website || tooFast) {
+      setStatus("success");
+      form.reset();
+      return;
+    }
+
+    if (!isEmailJsConfigured()) {
+      setStatus("error");
+      setErrorMessage(
+        "The quote form isn't fully set up yet. Please contact us directly in the meantime."
+      );
+      return;
+    }
+
     setStatus("submitting");
 
     try {
-      const res = await fetch("/api/quote", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(parsed.data),
-      });
-      const body = await res.json();
-
-      if (!res.ok) {
-        setStatus("error");
-        setErrorMessage(body.error ?? "Something went wrong. Please try again.");
-        return;
-      }
+      await emailjs.send(
+        emailjsConfig.serviceId!,
+        emailjsConfig.templateId!,
+        {
+          from_name: parsed.data.name,
+          from_email: parsed.data.email,
+          reply_to: parsed.data.email,
+          company: parsed.data.company,
+          phone: parsed.data.phone || "—",
+          product_interest: parsed.data.productInterest || "—",
+          message: parsed.data.message,
+        },
+        { publicKey: emailjsConfig.publicKey! }
+      );
 
       setStatus("success");
       form.reset();
     } catch {
       setStatus("error");
-      setErrorMessage("Something went wrong. Please try again.");
+      setErrorMessage("Something went wrong sending your request. Please try again.");
     }
   }
 

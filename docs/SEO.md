@@ -24,8 +24,7 @@ Every page requires:
 
 - `app/sitemap.ts` — generates `sitemap.xml` from static routes + content
   (products, services, industries, posts) via `lib/content`. Implemented.
-- `app/robots.ts` — allow all except `/api/`, points to the sitemap.
-  Implemented.
+- `app/robots.ts` — allow all, points to the sitemap. Implemented.
 - `app/manifest.ts` — PWA-style manifest for icons/theme color (navy).
   Implemented; icon is currently just `favicon.ico` — add proper
   192/512px PNG icons once the real logo is supplied.
@@ -41,10 +40,36 @@ Every page requires:
   placeholders are filled in. (JSON-LD itself isn't implemented yet — see
   `ROADMAP.md` Phase 3.)
 
-## Quote/contact form bot protection
+## Quote/contact form: EmailJS + bot protection
 
-`app/api/quote/route.ts` uses a honeypot field + a minimum-time-to-submit
-check (`lib/quote-schema.ts`) rather than an external CAPTCHA — no
-Turnstile/hCaptcha site keys were available. This is a reasonable interim
-measure; swap in Cloudflare Turnstile (or similar) once keys are available
-if spam becomes an issue.
+The form (`components/forms/QuoteForm.tsx`) sends via
+[EmailJS](https://dashboard.emailjs.com) directly from the browser — no
+server route, no server-side secret (see `.env.example`). This was chosen
+over a server route + Resend specifically to stay on a free tier with no
+domain-verification step (EmailJS free tier: 200 emails/month).
+
+Bot protection is a honeypot field + a minimum-time-to-submit check
+(`lib/quote-schema.ts`), run client-side before the `emailjs.send()` call,
+rather than an external CAPTCHA — no Turnstile/hCaptcha/reCAPTCHA site
+keys were available. This is a reasonable interim measure; EmailJS
+supports reCAPTCHA v3 per-template if spam becomes a real problem, and
+restricting the EmailJS key to specific origins (dashboard → Account →
+Security) is worth doing once the production domain is set.
+
+**EmailJS template setup** (one-time, in the EmailJS dashboard): create an
+Email Template under Content → Email Templates with these variables in the
+body (Settings → To/From/Reply-To should reference the recipient inbox and
+`{{reply_to}}`):
+
+| Variable | Source |
+|---|---|
+| `{{from_name}}` | Sender's name |
+| `{{from_email}}` | Sender's email |
+| `{{reply_to}}` | Same as `from_email` — set the template's Reply-To field to this so replying goes straight to the customer |
+| `{{company}}` | Sender's company |
+| `{{phone}}` | Sender's phone, or "—" if omitted |
+| `{{product_interest}}` | Selected product category, or "—" |
+| `{{message}}` | The inquiry itself |
+
+Then put the Service ID, Template ID, and Public Key (Account → API Keys)
+into `.env.local` per `.env.example`.
