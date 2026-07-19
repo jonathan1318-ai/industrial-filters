@@ -16,8 +16,12 @@ export const quoteFormSchema = z.object({
     .min(10, "Tell us a bit more about your requirement.")
     .max(2000),
   // Honeypot: hidden from real users via CSS, not `display:none`, so
-  // unsophisticated bots that skip hidden fields still fill it in.
-  website: z.string().max(0).optional().or(z.literal("")),
+  // unsophisticated bots that skip hidden fields still fill it in. Must
+  // accept non-empty values here (checked in app/api/quote/route.ts, not
+  // rejected by the schema) — otherwise a filled honeypot fails validation
+  // with a 400 instead of the intended silent "success" bot response,
+  // which would let a bot distinguish "detected" from "accepted".
+  website: z.string().max(200).optional().or(z.literal("")),
   formRenderedAt: z.number(),
 });
 

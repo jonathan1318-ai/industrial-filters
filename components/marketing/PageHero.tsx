@@ -21,7 +21,7 @@ export function PageHero({
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
           {eyebrow && (
-            <p className="text-sm font-semibold uppercase tracking-wide text-secondary">
+            <p className="text-sm font-semibold uppercase tracking-wide text-brand-green-on-primary">
               {eyebrow}
             </p>
           )}

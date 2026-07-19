@@ -28,8 +28,8 @@ export function CategoryCard({
           <span className="flex size-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
             <Icon className="size-5" aria-hidden />
           </span>
-          <CardTitle className="text-base group-hover:text-primary">
-            {title}
+          <CardTitle asChild className="text-base group-hover:text-primary">
+            <h3>{title}</h3>
           </CardTitle>
           <CardDescription>{description}</CardDescription>
         </Link>

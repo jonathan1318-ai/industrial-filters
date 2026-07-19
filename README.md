@@ -26,3 +26,16 @@ Without `.env.local`, the site runs fine but `/api/quote` returns a
 
 Run lint, typecheck, and build (in that order) before considering any
 change done — see `CLAUDE.md`.
+
+## Testing
+
+```bash
+npm run test        # Vitest unit tests (lib/**/*.test.ts)
+npm run test:e2e     # Playwright e2e smoke tests (e2e/*.spec.ts) — nav,
+                     # product search/filter, quote form, accessibility.
+                     # Builds and boots a production server on :3100 itself.
+```
+
+`.github/workflows/ci.yml` runs lint, typecheck, unit tests, build, and
+e2e tests on every push to `main` and every PR.
+

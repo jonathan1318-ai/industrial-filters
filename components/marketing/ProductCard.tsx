@@ -27,8 +27,8 @@ export function ProductCard({
               {category.title}
             </Badge>
           )}
-          <CardTitle className="text-base group-hover:text-primary">
-            {product.title}
+          <CardTitle asChild className="text-base group-hover:text-primary">
+            <h3>{product.title}</h3>
           </CardTitle>
           <CardDescription>{product.shortDescription}</CardDescription>
         </Link>

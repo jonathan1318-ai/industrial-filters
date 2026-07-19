@@ -40,6 +40,7 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   --color-brand-green-text: var(--brand-green-text);
+  --color-brand-green-on-primary: var(--brand-green-on-primary);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -68,6 +69,13 @@
      This darker shade (~5.2:1) is for green *text* on light backgrounds —
      use --secondary for fills/icons/borders, this for labels/eyebrows. */
   --brand-green-text: #3f7a2e;
+  /* For small/tracked-out text on the navy PageHero panel (PageHero.tsx).
+     Nominal #5FAE45-on-navy contrast computes to ~4.5:1, but automated
+     contrast checkers (axe) sample actual anti-aliased glyph pixels and
+     measure well below that for small uppercase tracked text — this
+     lighter tint (~7:1 nominal) keeps a real margin. Not verified against
+     dark mode's lighter --primary; dark mode isn't user-toggleable yet. */
+  --brand-green-on-primary: #a3e58c;
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.5 0.02 250);
   --accent: oklch(0.96 0.01 250);
@@ -104,6 +112,7 @@
   --secondary-foreground: oklch(0.145 0.01 250);
   /* Full-brightness brand green already passes AA on this dark background. */
   --brand-green-text: #5fae45;
+  --brand-green-on-primary: #a3e58c;
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
   --accent: oklch(0.269 0 0);

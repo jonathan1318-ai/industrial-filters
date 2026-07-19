@@ -22,7 +22,9 @@ export function Logo({ variant = "dark" }: { variant?: "dark" | "light" }) {
         )}
       >
         FIRUTA
-        <span className="text-secondary">.</span>
+        <span className={isLight ? "text-brand-green-on-primary" : "text-brand-green-text"}>
+          .
+        </span>
       </span>
       <span
         className={cn(

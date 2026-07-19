@@ -23,6 +23,17 @@ icons, and borders; use the `text-brand-green-text` utility (a darker green,
 mode `--brand-green-text` resolves back to the full-brightness green, which
 already passes against the dark navy background.
 
+**Green text on the navy `PageHero` panel needs a third, lighter tint —
+`text-brand-green-on-primary`.** Nominal #5FAE45-on-navy contrast computes
+to ~4.5:1 (barely passing), but axe-core's automated contrast checker
+samples actual anti-aliased glyph pixels rather than the raw CSS color
+pair, and for small/uppercase/tracked-out text (exactly `PageHero`'s
+eyebrow style) that sampling reports well below 4.5:1 in practice —
+verified via `e2e/accessibility.spec.ts`. `--brand-green-on-primary`
+(`#A3E58C`, ~7:1 nominal) carries enough margin to hold up under that
+stricter check. Don't use raw `text-secondary`/`text-brand-green-text` for
+eyebrow-style text on a navy background — use this token instead.
+
 ## Typography
 
 Inter (`next/font/google`), loaded as the `--font-sans` variable in

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
@@ -31,6 +31,12 @@ export const metadata: Metadata = {
     siteName: "Firuta Tech Services",
     locale: "en_MY",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0c355b",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

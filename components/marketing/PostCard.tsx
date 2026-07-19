@@ -27,8 +27,8 @@ export function PostCard({ post }: { post: Post }) {
           >
             {date}
           </time>
-          <CardTitle className="text-base group-hover:text-primary">
-            {post.title}
+          <CardTitle asChild className="text-base group-hover:text-primary">
+            <h3>{post.title}</h3>
           </CardTitle>
           <CardDescription>{post.excerpt}</CardDescription>
         </Link>
