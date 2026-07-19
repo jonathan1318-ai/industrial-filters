@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { PageHero } from "@/components/marketing/PageHero";
-import { CategoryCard } from "@/components/marketing/CategoryCard";
-import { productCategories } from "@/lib/content";
+import { ProductExplorer } from "@/components/marketing/ProductExplorer";
+import { productCategories, products } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Products",
@@ -20,17 +20,14 @@ export default function ProductsPage() {
       />
       <section className="py-16 sm:py-24">
         <Container>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {productCategories.map((category) => (
-              <CategoryCard
-                key={category.slug}
-                title={category.title}
-                description={category.description}
-                icon={category.icon}
-                href={`/products/${category.slug}`}
-              />
-            ))}
-          </div>
+          <ProductExplorer
+            products={products}
+            categories={productCategories.map(({ title, slug, description }) => ({
+              title,
+              slug,
+              description,
+            }))}
+          />
         </Container>
       </section>
     </>

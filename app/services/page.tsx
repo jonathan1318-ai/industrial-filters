@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { PageHero } from "@/components/marketing/PageHero";
+import { CategoryCard } from "@/components/marketing/CategoryCard";
+import { services } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -14,14 +16,21 @@ export default function ServicesPage() {
       <PageHero
         eyebrow="Services"
         title="Filtration services"
-        description="Full service details are being finalized. Get in touch and our team can advise on your filtration requirements today."
+        description="Beyond supplying filtration products, we support the full lifecycle of your filtration systems."
       />
       <section className="py-16 sm:py-24">
-        <Container className="max-w-2xl">
-          <p className="text-muted-foreground">
-            This page is in progress. Contact us for service inquiries in
-            the meantime.
-          </p>
+        <Container>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service) => (
+              <CategoryCard
+                key={service.slug}
+                title={service.title}
+                description={service.summary}
+                icon={service.icon}
+                href={`/services/${service.slug}`}
+              />
+            ))}
+          </div>
         </Container>
       </section>
     </>

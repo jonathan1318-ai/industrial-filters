@@ -6,9 +6,15 @@ in code/`CONTENT.md` — don't put one-off page copy in the CMS.
 
 > Sanity project setup (dataset, API tokens, Studio route) happens in a
 > later phase once schemas below are agreed and env vars are available —
-> see `docs/ROADMAP.md` Phase 2. Until then, product/service/industry pages
-> read from local placeholder data shaped identically to the schema below,
-> so swapping in Sanity later doesn't change component code.
+> see `docs/ROADMAP.md` Phase 2. Until then, product/service/industry/blog
+> pages read from `lib/content/data.ts` (typed per `lib/content/types.ts`,
+> shaped identically to the schema below, with lookup helpers in
+> `lib/content/index.ts`), so swapping in a Sanity client later only means
+> changing `data.ts`'s data source — not the page/component code.
+>
+> Product specs in `data.ts` are illustrative (industry-standard values per
+> category), not confirmed Firuta specs — replace with real catalog data
+> before launch.
 
 ## `product`
 
