@@ -72,12 +72,24 @@ until real photography is supplied.
 
 **Implementation:** `components/marketing/CloudinaryImage.tsx` renders a
 free Unsplash stock photo (source URLs in `lib/content/data.ts` —
-`heroImageUrl` and each `productCategory.imageUrl`) through Cloudinary's
-`fetch` delivery type (`lib/cloudinary.ts`), which optimizes format/size
-on the fly with no upload step. Falls back to the abstract
-`PlaceholderVisual` graphic whenever `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`
-isn't set, so a missing/misconfigured Cloudinary account never shows a
-broken image.
+`heroImageUrl` and each `imageUrl` on product categories, services,
+industries, and posts) through Cloudinary's `fetch` delivery type
+(`lib/cloudinary.ts`), which optimizes format/size on the fly with no
+upload step. Falls back to the abstract `PlaceholderVisual` graphic
+whenever `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` isn't set, so a
+missing/misconfigured Cloudinary account never shows a broken image.
+
+Photos appear on: the homepage hero, the About page, product category
+cards (homepage + `/products`), product detail pages, service/industry
+listing cards, and blog post cards — so visitors see representative
+imagery before clicking into a product, service, industry, or article.
+
+**Cache/credit efficiency:** `lib/cloudinary.ts` exports `CLOUDINARY_SIZES`
+(`card`, `detail`, `hero`) so every card/hero across the site requests the
+same handful of transformations instead of one-off sizes — Cloudinary
+caches each unique transformation after its first request. `next.config.ts`
+also sets a 30-day `minimumCacheTTL` on `next/image`, since these are
+static placeholder photos that only change on redeploy.
 
 **One-time Cloudinary setup** (free tier, no card required):
 1. Sign up at [cloudinary.com](https://cloudinary.com) and note your

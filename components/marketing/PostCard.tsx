@@ -5,6 +5,8 @@ import {
   CardDescription,
   CardTitle,
 } from "@/components/ui/card";
+import { CloudinaryImage } from "@/components/marketing/CloudinaryImage";
+import { CLOUDINARY_SIZES } from "@/lib/cloudinary";
 import type { Post } from "@/lib/content";
 
 export function PostCard({ post }: { post: Post }) {
@@ -15,12 +17,19 @@ export function PostCard({ post }: { post: Post }) {
   });
 
   return (
-    <Card className="ring-border transition-shadow hover:shadow-md">
-      <CardContent>
-        <Link
-          href={`/blog/${post.slug}`}
-          className="group flex flex-col gap-2 rounded-md focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
-        >
+    <Card size="sm" className="overflow-hidden py-0 ring-border transition-shadow hover:shadow-md">
+      <Link
+        href={`/blog/${post.slug}`}
+        className="group flex flex-col rounded-md focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+      >
+        <CloudinaryImage
+          src={post.imageUrl}
+          alt={`${post.title} — cover image`}
+          className="aspect-[4/3] w-full rounded-none"
+          width={CLOUDINARY_SIZES.card.width}
+          height={CLOUDINARY_SIZES.card.height}
+        />
+        <CardContent className="flex flex-1 flex-col gap-2 py-4">
           <time
             dateTime={post.publishedAt}
             className="text-xs font-medium text-muted-foreground"
@@ -31,8 +40,8 @@ export function PostCard({ post }: { post: Post }) {
             <h3>{post.title}</h3>
           </CardTitle>
           <CardDescription>{post.excerpt}</CardDescription>
-        </Link>
-      </CardContent>
+        </CardContent>
+      </Link>
     </Card>
   );
 }

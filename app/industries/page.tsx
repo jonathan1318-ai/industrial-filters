@@ -28,6 +28,7 @@ export default function IndustriesPage() {
                 description={industry.summary}
                 icon={industry.icon}
                 href={`/industries/${industry.slug}`}
+                imageUrl={industry.imageUrl}
               />
             ))}
           </div>

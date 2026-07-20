@@ -28,6 +28,7 @@ export default function ServicesPage() {
                 description={service.summary}
                 icon={service.icon}
                 href={`/services/${service.slug}`}
+                imageUrl={service.imageUrl}
               />
             ))}
           </div>

@@ -10,16 +10,17 @@ export type Seo = {
   noIndex?: boolean;
 };
 
+// Free stock photo URL (Unsplash), delivered via Cloudinary's fetch
+// transform — see lib/cloudinary.ts. Placeholder imagery, not real Firuta
+// photography; swap when real photos are supplied.
+type WithImage = { imageUrl?: string };
+
 export type ProductCategory = {
   title: string;
   slug: string;
   description: string;
   icon: LucideIcon;
-  // Free stock photo URL (Unsplash), delivered via Cloudinary's fetch
-  // transform — see lib/cloudinary.ts. Placeholder imagery, not a real
-  // Firuta product photo; swap when real photography is supplied.
-  imageUrl?: string;
-};
+} & WithImage;
 
 export type ProductSpec = { label: string; value: string };
 
@@ -41,7 +42,7 @@ export type Service = {
   body: string;
   icon: LucideIcon;
   seo?: Seo;
-};
+} & WithImage;
 
 export type Industry = {
   title: string;
@@ -50,7 +51,7 @@ export type Industry = {
   body: string;
   icon: LucideIcon;
   seo?: Seo;
-};
+} & WithImage;
 
 export type Post = {
   title: string;
@@ -60,4 +61,4 @@ export type Post = {
   author: string;
   publishedAt: string;
   seo?: Seo;
-};
+} & WithImage;

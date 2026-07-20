@@ -8,7 +8,10 @@ industrial filtration systems.
 **Legal/contact details:**
 
 - Registered name: `[COMPANY LEGAL NAME]` — still a placeholder.
-- Address: `[ADDRESS, MALAYSIA]` — still a placeholder.
+- Address: `Jalan 22A, USJ 12/1D, 47630 Subang Jaya, Selangor, Malaysia` —
+  a sample pre-production placeholder (user-provided stand-in, not a
+  confirmed registered business address). Swap for the real address before
+  launch.
 - Phone / WhatsApp: `016-612-8291` — the site owner's personal number,
   provided as a working demo contact. Not the official business line.
 - Email: `jacobjayenpillai@gmail.com` — the site owner's personal email,

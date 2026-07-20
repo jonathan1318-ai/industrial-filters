@@ -22,11 +22,14 @@ export default function ProductsPage() {
         <Container>
           <ProductExplorer
             products={products}
-            categories={productCategories.map(({ title, slug, description }) => ({
-              title,
-              slug,
-              description,
-            }))}
+            categories={productCategories.map(
+              ({ title, slug, description, imageUrl }) => ({
+                title,
+                slug,
+                description,
+                imageUrl,
+              })
+            )}
           />
         </Container>
       </section>

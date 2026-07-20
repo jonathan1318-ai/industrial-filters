@@ -88,6 +88,7 @@ export const industries: Industry[] = [
     icon: Factory,
     summary: "Process and hydraulic filtration for general manufacturing lines.",
     body: "Manufacturing facilities rely on consistent filtration to protect hydraulic systems, coolants, and process fluids from contamination that causes unplanned downtime.",
+    imageUrl: heroImageUrl,
   },
   {
     title: "Semiconductor",
@@ -95,6 +96,7 @@ export const industries: Industry[] = [
     icon: Cpu,
     summary: "Ultra-high-purity air and liquid filtration for cleanroom processes.",
     body: "Semiconductor fabrication demands tightly controlled particulate levels. HEPA and ultra-fine cartridge filtration support cleanroom air handling and process water purity.",
+    imageUrl: "https://images.unsplash.com/photo-1592659762303-90081d34b277",
   },
   {
     title: "Food & Beverage",
@@ -102,6 +104,7 @@ export const industries: Industry[] = [
     icon: UtensilsCrossed,
     summary: "Hygienic filtration for food-safe process lines.",
     body: "Food and beverage production requires filtration materials and housings suited to hygienic, food-contact environments across process water and product lines.",
+    imageUrl: "https://images.unsplash.com/photo-1758978912199-e0df57bde255",
   },
   {
     title: "Chemical",
@@ -109,6 +112,7 @@ export const industries: Industry[] = [
     icon: FlaskConical,
     summary: "Chemically compatible filtration for aggressive process fluids.",
     body: "Chemical processing needs filter media and housings selected for compatibility with the fluids involved, from mild aqueous solutions to aggressive solvents.",
+    imageUrl: "https://images.unsplash.com/photo-1694674818352-f6061a0561a1",
   },
   {
     title: "HVAC",
@@ -116,6 +120,7 @@ export const industries: Industry[] = [
     icon: AirVent,
     summary: "Air filtration for commercial and industrial HVAC systems.",
     body: "HVAC systems depend on properly rated air filtration to maintain indoor air quality, equipment efficiency, and compliance with ventilation standards.",
+    imageUrl: "https://images.unsplash.com/photo-1634114581640-9a1734fae3e5",
   },
   {
     title: "Water Treatment",
@@ -123,6 +128,7 @@ export const industries: Industry[] = [
     icon: Droplet,
     summary: "Filtration for potable, process, and wastewater treatment.",
     body: "Water treatment facilities use staged filtration — from sediment to fine polishing — to meet water quality targets across potable and process water systems.",
+    imageUrl: "https://images.unsplash.com/photo-1705708551758-76b153fa536e",
   },
 ];
 
@@ -309,6 +315,11 @@ export const products: Product[] = [
   },
 ];
 
+// Reused across services/posts below — see the comment on productCategories
+// re: keeping a small, consistent set of source images.
+const wrenchesImageUrl =
+  "https://images.unsplash.com/photo-1613206485381-b028e578e791";
+
 export const services: Service[] = [
   {
     title: "Filter Selection & Consultation",
@@ -316,6 +327,7 @@ export const services: Service[] = [
     icon: ClipboardCheck,
     summary: "Application review and product recommendation for your process.",
     body: "We review your process conditions — fluid or air type, flow rate, particulate load, temperature, and pressure — to recommend a filtration solution matched to the application rather than a generic catalog pick.",
+    imageUrl: "https://images.unsplash.com/photo-1777118947168-b6e806cb80cf",
   },
   {
     title: "Installation Support",
@@ -323,6 +335,7 @@ export const services: Service[] = [
     icon: Wrench,
     summary: "On-site and remote support for filtration system installation.",
     body: "Our team supports the installation of new filtration housings and systems, including sizing verification, fitment checks, and commissioning guidance.",
+    imageUrl: wrenchesImageUrl,
   },
   {
     title: "Preventive Maintenance & Replacement",
@@ -330,6 +343,7 @@ export const services: Service[] = [
     icon: ClipboardCheck,
     summary: "Scheduled replacement programs to avoid unplanned downtime.",
     body: "Scheduled filter replacement programs, sized to your process's contamination load, reduce the risk of unplanned downtime from filter fouling or bypass.",
+    imageUrl: "https://images.unsplash.com/photo-1698031610511-c7a35d121b17",
   },
   {
     title: "Emergency Filtration Support",
@@ -337,6 +351,7 @@ export const services: Service[] = [
     icon: LifeBuoy,
     summary: "Rapid sourcing support when a filtration failure halts production.",
     body: "When a filtration failure threatens to halt production, our team helps source and expedite replacement filtration equipment as quickly as possible.",
+    imageUrl: heroImageUrl,
   },
 ];
 
@@ -349,6 +364,7 @@ export const posts: Post[] = [
     body: "Micron rating describes the smallest particle size a filter is designed to capture, but nominal and absolute ratings mean different things — and picking the wrong one can mean either premature fouling or inadequate protection. Start with your process's contamination sensitivity and work backward from there, rather than defaulting to the finest rating available.",
     author: "Firuta Tech Services",
     publishedAt: "2026-05-12",
+    imageUrl: "https://images.unsplash.com/photo-1777118947168-b6e806cb80cf",
   },
   {
     title: "Preventive Maintenance Tips for Industrial Filtration Systems",
@@ -358,6 +374,7 @@ export const posts: Post[] = [
     body: "Waiting for a differential pressure alarm before replacing a filter often means the system has already been running inefficiently for some time. A scheduled replacement interval, sized to your contamination load, keeps flow rates and system efficiency consistent.",
     author: "Firuta Tech Services",
     publishedAt: "2026-06-03",
+    imageUrl: wrenchesImageUrl,
   },
   {
     title: "Understanding HEPA Filter Efficiency Ratings",
@@ -367,5 +384,6 @@ export const posts: Post[] = [
     body: "EN 1822 defines HEPA efficiency classes from H13 through H14 based on Most Penetrating Particle Size (MPPS) testing. Choosing between them comes down to your cleanroom classification and the contamination sensitivity of your process, not simply picking the higher-rated option by default.",
     author: "Firuta Tech Services",
     publishedAt: "2026-07-01",
+    imageUrl: "https://images.unsplash.com/photo-1436473849883-bb3464c23e93",
   },
 ];

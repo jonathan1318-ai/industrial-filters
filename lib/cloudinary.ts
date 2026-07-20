@@ -17,3 +17,15 @@ export function cloudinaryFetchUrl(
   const transformations = `f_auto,q_auto,c_fill,w_${width},h_${height}`;
   return `https://res.cloudinary.com/${cloudName}/image/fetch/${transformations}/${encodeURIComponent(sourceUrl)}`;
 }
+
+// Shared width/height presets so every card/hero across the site requests
+// the same handful of transformations for a given source image, rather
+// than a slightly different size per usage. Cloudinary bills (and then
+// CDN-caches) each distinct transformation once — reusing these presets
+// keeps free-tier credit usage low regardless of how many cards end up
+// referencing the same photo.
+export const CLOUDINARY_SIZES = {
+  card: { width: 480, height: 360 },
+  detail: { width: 800, height: 800 },
+  hero: { width: 900, height: 675 },
+} as const;

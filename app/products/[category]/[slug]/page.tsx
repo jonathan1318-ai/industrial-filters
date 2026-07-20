@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { PageHero } from "@/components/marketing/PageHero";
 import { CloudinaryImage } from "@/components/marketing/CloudinaryImage";
+import { CLOUDINARY_SIZES } from "@/lib/cloudinary";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -60,8 +61,8 @@ export default async function ProductPage({
             src={category.imageUrl}
             alt={`${category.title} — representative product photography`}
             className="aspect-square w-full"
-            width={800}
-            height={800}
+            width={CLOUDINARY_SIZES.detail.width}
+            height={CLOUDINARY_SIZES.detail.height}
           />
 
           <div>

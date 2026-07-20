@@ -30,6 +30,7 @@ export default function Home() {
                   description={category.description}
                   icon={category.icon}
                   href={`/products/${category.slug}`}
+                  imageUrl={category.imageUrl}
                 />
               </FadeIn>
             ))}

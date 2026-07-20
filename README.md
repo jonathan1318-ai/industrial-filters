@@ -373,3 +373,57 @@ byte-identical fallback rendering (no regression), zero console errors.
 **Still open: the rest of the list.** Free live chat (Tawk.to), FAQ
 section, analytics (Microsoft Clarity / Google Analytics), Google Search
 Console, UptimeRobot — not started, revisit once prioritized.
+
+### Real Cloudinary account, sample address, and expanding photography site-wide
+
+User created a live Cloudinary account and shared the cloud name
+(`abrkfqlx`). A `curl` sanity check against the real account returned
+`200` on a `fetch`-transform URL — unlike the earlier account-less "demo"
+cloud test, this account already had remote `fetch` enabled, so the
+manual Console toggle documented in `DESIGN.md` wasn't needed. Set
+`NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=abrkfqlx` in a local `.env.local`
+(gitignored, never committed) purely to verify real photography end-to-end
+before reporting it working.
+
+User also asked to use `Jalan 22A, USJ 12/1D` as a sample business
+address ahead of production, replacing the raw `[ADDRESS, MALAYSIA]`
+placeholder. Updated `lib/contact.ts` and `docs/PROJECT.md` to
+`Jalan 22A, USJ 12/1D, 47630 Subang Jaya, Selangor, Malaysia`, labeled
+explicitly as a sample pre-production stand-in, not a confirmed
+registered address — flows through automatically to the footer and
+Contact page, both of which just render `contact.address`.
+
+**Shipped: stock photography on every listing page, not just the
+homepage/product-detail.** Previously photography only covered the
+homepage hero and product detail pages; category/service/industry/blog
+cards and the About page still showed the abstract `PlaceholderVisual`.
+Extended the content types (`lib/content/types.ts`) with a shared
+`imageUrl?: string` field, added it to all industries, services, and
+posts in `lib/content/data.ts` (reusing thematically-fitting photos
+already sourced where possible, sourcing and verifying 4 new free
+Unsplash photos otherwise: semiconductor circuit board, food & beverage
+tanks, chemical pipes, wrenches for maintenance-related content — same
+no-identifiable-people rule as before). `ProductCard`, `CategoryCard`,
+and `PostCard` now render a `CloudinaryImage` thumbnail before the card's
+text content, so visitors see representative imagery before clicking in.
+About page rewritten to a two-column layout with a photo alongside the
+mission/vision copy.
+
+**Cache/credit efficiency**, addressed proactively per the user's ask to
+avoid unnecessary re-fetches: added `CLOUDINARY_SIZES` to
+`lib/cloudinary.ts` (`card` 480×360, `detail` 800×800, `hero` 900×675) so
+every image request across the site reuses one of three fixed
+transformations instead of ad-hoc sizes — Cloudinary caches each unique
+transformation after its first request, so a small, fixed set of sizes
+means near-total cache hits after the first page load of each size class.
+Also added `minimumCacheTTL: 2592000` (30 days) to `next.config.ts`'s
+`images` config, since these are static placeholder photos that only
+change on redeploy, reducing repeat requests through Next's own image
+optimizer.
+
+Verified: lint, typecheck, build, full unit suite (22 tests), full e2e
+suite (23 tests) all pass. Checked visually in the browser in both states
+— Cloudinary unconfigured (clean fallback graphics, no broken requests)
+and Cloudinary configured with the real account (real photos rendering
+correctly across Products, Services, Industries, Blog, About, and Home,
+zero console errors, no accessibility regressions).

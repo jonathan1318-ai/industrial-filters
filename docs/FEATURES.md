@@ -32,10 +32,14 @@
   (see `SEO.md`).
 - Blog (Sanity-backed, same CMS as products/services/industries).
 - Product search and product category filtering.
-- Real stock photography (hero + product category images) via Cloudinary's
-  free fetch-transform tier, with an automatic fallback to the abstract
-  placeholder graphic until `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` is set —
-  see `DESIGN.md`'s Imagery section for setup steps.
+- Real stock photography via Cloudinary's free fetch-transform tier —
+  covers the homepage hero, About page, and listing/detail cards across
+  Products, Services, Industries, and Blog — with an automatic fallback to
+  the abstract placeholder graphic until
+  `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` is set. Image dimensions are
+  standardized per-context (card/detail/hero) and cached for 30 days to
+  minimize repeat fetches — see `DESIGN.md`'s Imagery section for setup
+  steps.
 - Dark mode — optional, not required for launch (tokens already support it
   in `globals.css`; revisit after core pages ship).
 

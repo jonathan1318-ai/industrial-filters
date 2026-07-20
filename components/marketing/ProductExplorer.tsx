@@ -6,7 +6,12 @@ import { ProductCard } from "@/components/marketing/ProductCard";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/content";
 
-type CategorySummary = { title: string; slug: string; description: string };
+type CategorySummary = {
+  title: string;
+  slug: string;
+  description: string;
+  imageUrl?: string;
+};
 
 export function ProductExplorer({
   products,

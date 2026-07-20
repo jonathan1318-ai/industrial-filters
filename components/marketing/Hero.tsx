@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/button";
 import { CloudinaryImage } from "@/components/marketing/CloudinaryImage";
+import { CLOUDINARY_SIZES } from "@/lib/cloudinary";
 import { heroImageUrl } from "@/lib/content";
 
 export function Hero() {
@@ -49,8 +50,8 @@ export function Hero() {
             src={heroImageUrl}
             alt="Interior of an industrial manufacturing facility"
             className="aspect-4/3 w-full"
-            width={900}
-            height={675}
+            width={CLOUDINARY_SIZES.hero.width}
+            height={CLOUDINARY_SIZES.hero.height}
             priority
           />
         </motion.div>
