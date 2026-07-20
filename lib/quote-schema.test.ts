@@ -6,7 +6,7 @@ const validSubmission = {
   company: "Test Manufacturing Sdn Bhd",
   email: "jane@example.com",
   phone: "",
-  productInterest: "",
+  topic: "",
   message: "We need filtration for a new production line.",
   website: "",
   formRenderedAt: Date.now(),
@@ -33,7 +33,7 @@ describe("quoteFormSchema", () => {
     expect(result.success).toBe(false);
   });
 
-  it("still validates when the honeypot is filled in (bot case) — the route, not the schema, decides what happens next", () => {
+  it("still validates when the honeypot is filled in (bot case) — QuoteForm, not the schema, decides what happens next", () => {
     const result = quoteFormSchema.safeParse({
       ...validSubmission,
       website: "http://spammer.example",
@@ -41,7 +41,7 @@ describe("quoteFormSchema", () => {
     expect(result.success).toBe(true);
   });
 
-  it("allows phone and productInterest to be omitted", () => {
+  it("allows phone and topic to be omitted", () => {
     const result = quoteFormSchema.safeParse({
       name: validSubmission.name,
       company: validSubmission.company,

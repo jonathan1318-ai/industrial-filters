@@ -21,9 +21,11 @@ export default function RequestQuotePage() {
       <section className="py-16 sm:py-24">
         <Container className="max-w-2xl">
           <QuoteForm
-            productOptions={productCategories.map(({ title, slug }) => ({
-              title,
-              slug,
+            topicLabel="Product interest (optional)"
+            topicPlaceholder="Select a product category"
+            topicOptions={productCategories.map(({ title }) => ({
+              label: title,
+              value: title,
             }))}
           />
         </Container>

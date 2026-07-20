@@ -58,9 +58,10 @@ Security) is worth doing once the production domain is set.
 
 **EmailJS template setup** (one-time, in the EmailJS dashboard): create an
 Email Template under Content → Email Templates with these variables in the
-body. In the template's Settings tab (not the content editor), set **To
-Email** to the recipient inbox and **Reply To** to `{{email}}` so replying
-goes straight to the customer, not back to yourself:
+**Subject** field and the body. In the template's Settings tab (not the
+content editor), set **To Email** to the recipient inbox and **Reply To**
+to `{{email}}` so replying goes straight to the customer, not back to
+yourself:
 
 | Variable | Source |
 |---|---|
@@ -68,8 +69,14 @@ goes straight to the customer, not back to yourself:
 | `{{email}}` | Sender's email |
 | `{{company}}` | Sender's company |
 | `{{phone}}` | Sender's phone, or "—" if omitted |
-| `{{product_interest}}` | Selected product category, or "—" |
+| `{{topic}}` | What the inquiry is about — a product category on `/request-quote`, or a general reason (Partnership, Support, ...) on `/contact`; "—" if omitted |
 | `{{message}}` | The inquiry itself |
+
+Suggested Subject: `New inquiry: {{topic}}` — EmailJS renders unmatched
+variables as empty, so a Subject line left over from a default template
+(e.g. referencing `{{subject}}`/`{{category}}`, which nothing sends) comes
+through blank. Double-check the Subject field, not just the body, when
+editing a template.
 
 Don't include variables the form doesn't collect (e.g. a default
 template's `{{time}}`/`{{category}}`/`{{subject}}`) — EmailJS renders

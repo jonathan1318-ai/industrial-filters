@@ -9,7 +9,10 @@ export const quoteFormSchema = z.object({
   company: z.string().trim().min(2, "Enter your company name.").max(100),
   email: z.string().trim().email("Enter a valid email address."),
   phone: z.string().trim().max(30).optional().or(z.literal("")),
-  productInterest: z.string().trim().max(100).optional().or(z.literal("")),
+  // What the inquiry is about — a product category on /request-quote, or
+  // a general reason (Partnership, Support, ...) on /contact. Free text
+  // so either page's option list works without a schema change.
+  topic: z.string().trim().max(100).optional().or(z.literal("")),
   message: z
     .string()
     .trim()
@@ -17,10 +20,11 @@ export const quoteFormSchema = z.object({
     .max(2000),
   // Honeypot: hidden from real users via CSS, not `display:none`, so
   // unsophisticated bots that skip hidden fields still fill it in. Must
-  // accept non-empty values here (checked in app/api/quote/route.ts, not
-  // rejected by the schema) — otherwise a filled honeypot fails validation
-  // with a 400 instead of the intended silent "success" bot response,
-  // which would let a bot distinguish "detected" from "accepted".
+  // accept non-empty values here (checked in QuoteForm.tsx before the
+  // EmailJS send, not rejected by the schema) — otherwise a filled
+  // honeypot fails validation with an error instead of the intended
+  // silent "success" bot response, which would let a bot distinguish
+  // "detected" from "accepted".
   website: z.string().max(200).optional().or(z.literal("")),
   formRenderedAt: z.number(),
 });

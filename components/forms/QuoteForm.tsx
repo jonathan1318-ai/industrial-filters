@@ -17,16 +17,20 @@ import {
 import { MIN_SUBMIT_TIME_MS, quoteFormSchema } from "@/lib/quote-schema";
 import { emailjsConfig, isEmailJsConfigured } from "@/lib/emailjs";
 
-type ProductOption = { title: string; slug: string };
+type TopicOption = { label: string; value: string };
 
 type FieldErrors = Partial<
   Record<"name" | "company" | "email" | "phone" | "message", string>
 >;
 
 export function QuoteForm({
-  productOptions = [],
+  topicLabel = "Topic (optional)",
+  topicPlaceholder = "Select an option",
+  topicOptions = [],
 }: {
-  productOptions?: ProductOption[];
+  topicLabel?: string;
+  topicPlaceholder?: string;
+  topicOptions?: TopicOption[];
 }) {
   const [renderedAt] = useState(() => Date.now());
   const [status, setStatus] = useState<
@@ -45,7 +49,7 @@ export function QuoteForm({
       company: String(formData.get("company") ?? ""),
       email: String(formData.get("email") ?? ""),
       phone: String(formData.get("phone") ?? ""),
-      productInterest: String(formData.get("productInterest") ?? ""),
+      topic: String(formData.get("topic") ?? ""),
       message: String(formData.get("message") ?? ""),
       website: String(formData.get("website") ?? ""),
       formRenderedAt: renderedAt,
@@ -95,7 +99,7 @@ export function QuoteForm({
           email: parsed.data.email,
           company: parsed.data.company,
           phone: parsed.data.phone || "—",
-          product_interest: parsed.data.productInterest || "—",
+          topic: parsed.data.topic || "—",
           message: parsed.data.message,
         },
         { publicKey: emailjsConfig.publicKey! }
@@ -153,17 +157,17 @@ export function QuoteForm({
         </div>
       </div>
 
-      {productOptions.length > 0 && (
+      {topicOptions.length > 0 && (
         <div className="space-y-2">
-          <Label htmlFor="productInterest">Product interest (optional)</Label>
-          <Select name="productInterest">
-            <SelectTrigger id="productInterest" className="w-full">
-              <SelectValue placeholder="Select a product category" />
+          <Label htmlFor="topic">{topicLabel}</Label>
+          <Select name="topic">
+            <SelectTrigger id="topic" className="w-full">
+              <SelectValue placeholder={topicPlaceholder} />
             </SelectTrigger>
             <SelectContent>
-              {productOptions.map((option) => (
-                <SelectItem key={option.slug} value={option.title}>
-                  {option.title}
+              {topicOptions.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
                 </SelectItem>
               ))}
             </SelectContent>

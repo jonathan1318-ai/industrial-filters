@@ -11,6 +11,15 @@ export const metadata: Metadata = {
     "Get in touch with Firuta Tech Services for industrial filtration inquiries.",
 };
 
+const contactTopics = [
+  "General Inquiry",
+  "Request a Quote",
+  "Partnership",
+  "Support",
+  "Media / Press",
+  "Other",
+].map((label) => ({ label, value: label }));
+
 export default function ContactPage() {
   return (
     <>
@@ -73,7 +82,11 @@ export default function ContactPage() {
               Send us a message
             </h2>
             <div className="mt-6">
-              <QuoteForm />
+              <QuoteForm
+                topicLabel="What's this about? (optional)"
+                topicPlaceholder="Select a reason"
+                topicOptions={contactTopics}
+              />
             </div>
           </div>
         </Container>
