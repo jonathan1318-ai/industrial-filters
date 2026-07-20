@@ -349,8 +349,27 @@ dead button. Subtle mount animation, respects the site-wide
 accessibility sweep picks it up automatically since it's on every page.
 23 e2e tests now, all passing.
 
-**Still open: Cloudinary + stock photography, and the rest of the list.**
-Not started — Cloudinary needs an account (mirrors the EmailJS pattern:
-code gets built ready to consume it, but the account/credentials are the
-user's to create), and picking real stock photos needs either that
-account or a sourcing decision. Revisit once prioritized.
+**Shipped: Cloudinary + real stock photography.** Asked which sourcing
+approach to take (Cloudinary + your own account vs. direct stock photos
+with no account vs. skip for now) — went with Cloudinary. Sourced and
+verified 7 free Unsplash photos (regular license, no identifiable
+people): one general industrial hero shot, one per product category.
+Built `lib/cloudinary.ts` (constructs Cloudinary "fetch"-transform URLs —
+optimizes any public image URL on the fly, no upload step) and
+`components/marketing/CloudinaryImage.tsx` (renders the real photo via
+`next/image` when `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` is set, falls back
+to the existing `PlaceholderVisual` graphic otherwise — never requests a
+broken URL). Wired into the homepage hero and product detail pages.
+`docs/DESIGN.md` documents the one-time account setup, including a
+non-obvious step: new Cloudinary accounts have remote `fetch` disabled by
+default (Console → Settings → Security → uncheck "Fetched URL" under
+Restricted media types) — found by reading Cloudinary's own docs rather
+than assuming, after the account-less "demo" cloud predictably returned
+401 during a sanity check. Code ships fully ready; only the cloud-name
+env var is missing until the account exists. Verified: build, full e2e
+suite (23 tests) pass with Cloudinary unconfigured, screenshots confirm
+byte-identical fallback rendering (no regression), zero console errors.
+
+**Still open: the rest of the list.** Free live chat (Tawk.to), FAQ
+section, analytics (Microsoft Clarity / Google Analytics), Google Search
+Console, UptimeRobot — not started, revisit once prioritized.
