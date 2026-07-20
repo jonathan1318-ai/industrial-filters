@@ -326,33 +326,31 @@ and added the Subject-field callout mentioned above. Verified both
 dropdowns render with their correct, page-specific options via browser
 screenshots before shipping.
 
-### Open discussion: making it easier to contact Firuta (not yet implemented)
+### Contact-ease brainstorm, and working through the list
 
-Brainstormed free/low-cost additions, not yet built — captured here so
-the reasoning isn't lost before a decision is made:
+Brainstormed free/low-cost additions to make it easier for visitors to
+reach Firuta. Ranked two as top picks — a floating WhatsApp button
+(near-zero effort, and WhatsApp is often the primary contact channel for
+SMEs in Malaysia) and Cloudinary + free stock photography (the site had
+zero real photography at this point, all abstract icon panels via
+`PlaceholderVisual`) — plus a longer list of smaller free tools:
+free-forever live chat ([Tawk.to](https://www.tawk.to)), an FAQ section,
+free analytics (Microsoft Clarity or Google Analytics), Google Search
+Console, and free uptime monitoring (UptimeRobot).
 
-- **Floating WhatsApp button** (persistent, bottom-right) — top pick;
-  near-zero effort since `lib/contact.ts` already has the `wa.me` link
-  logic, and WhatsApp is often the primary contact channel for SMEs in
-  Malaysia.
-- **Cloudinary + free stock photography** — the site currently has zero
-  real photography (all abstract icon panels via `PlaceholderVisual`).
-  Cloudinary's free tier (credit-based: storage/bandwidth/transformations)
-  plus free stock photos (Unsplash/Pexels) would let the product pages
-  show actual imagery — still clearly placeholder, not claiming to be
-  Firuta's real facilities, consistent with `CLAUDE.md`'s imagery rule.
-  Second top pick, biggest visual-impact item on the list.
-- **Free live chat** — [Tawk.to](https://www.tawk.to) is free forever
-  (not a trial tier). Trade-off: third-party script, adds some JS weight
-  and a privacy-policy consideration.
-- **FAQ section** — cuts down on repetitive contact-form questions, pure
-  content work, no tooling needed.
-- **Microsoft Clarity** — fully free session recordings/heatmaps, no tier
-  limits. Google Analytics is the alternative if traffic/funnel numbers
-  matter more than seeing where visitors get stuck.
-- **Google Search Console** — free; becomes relevant once there's a real
-  domain, feeds the existing `sitemap.xml` to Google.
-- **UptimeRobot** — free tier uptime monitoring/alerting; only useful once
-  actually deployed.
+**Shipped: floating WhatsApp button.**
+`components/layout/WhatsAppButton.tsx`, rendered globally in
+`app/layout.tsx`, bottom-right, present on every page. Reuses
+`lib/contact.ts`'s existing `whatsappHref()` helper. Self-hides if the
+WhatsApp number ever reverts to a `[PLACEHOLDER]`, so it can't ship as a
+dead button. Subtle mount animation, respects the site-wide
+`reducedMotion="user"` config like everything else. Covered by a new
+`e2e/nav.spec.ts` test (presence + correct `wa.me` href) — the existing
+accessibility sweep picks it up automatically since it's on every page.
+23 e2e tests now, all passing.
 
-Not prioritized yet — pending which of these (if any) get picked up next.
+**Still open: Cloudinary + stock photography, and the rest of the list.**
+Not started — Cloudinary needs an account (mirrors the EmailJS pattern:
+code gets built ready to consume it, but the account/credentials are the
+user's to create), and picking real stock photos needs either that
+account or a sourcing decision. Revisit once prioritized.
