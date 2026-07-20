@@ -58,18 +58,23 @@ Security) is worth doing once the production domain is set.
 
 **EmailJS template setup** (one-time, in the EmailJS dashboard): create an
 Email Template under Content → Email Templates with these variables in the
-body (Settings → To/From/Reply-To should reference the recipient inbox and
-`{{reply_to}}`):
+body. In the template's Settings tab (not the content editor), set **To
+Email** to the recipient inbox and **Reply To** to `{{email}}` so replying
+goes straight to the customer, not back to yourself:
 
 | Variable | Source |
 |---|---|
-| `{{from_name}}` | Sender's name |
-| `{{from_email}}` | Sender's email |
-| `{{reply_to}}` | Same as `from_email` — set the template's Reply-To field to this so replying goes straight to the customer |
+| `{{name}}` | Sender's name |
+| `{{email}}` | Sender's email |
 | `{{company}}` | Sender's company |
 | `{{phone}}` | Sender's phone, or "—" if omitted |
 | `{{product_interest}}` | Selected product category, or "—" |
 | `{{message}}` | The inquiry itself |
+
+Don't include variables the form doesn't collect (e.g. a default
+template's `{{time}}`/`{{category}}`/`{{subject}}`) — EmailJS renders
+unmatched placeholders as empty rather than erroring, but it's a cleaner
+email without them.
 
 Then put the Service ID, Template ID, and Public Key (Account → API Keys)
 into `.env.local` per `.env.example`.

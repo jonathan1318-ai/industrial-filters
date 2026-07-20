@@ -91,9 +91,8 @@ export function QuoteForm({
         emailjsConfig.serviceId!,
         emailjsConfig.templateId!,
         {
-          from_name: parsed.data.name,
-          from_email: parsed.data.email,
-          reply_to: parsed.data.email,
+          name: parsed.data.name,
+          email: parsed.data.email,
           company: parsed.data.company,
           phone: parsed.data.phone || "—",
           product_interest: parsed.data.productInterest || "—",
