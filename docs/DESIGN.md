@@ -65,9 +65,35 @@ Lucide (`lucide-react`), already wired via shadcn's `iconLibrary` config.
 
 Industrial: factories, clean rooms, HVAC plant rooms, water treatment
 facilities, filtration equipment close-ups. No stock photos of generic
-office workers. Use placeholder imagery (clearly sourced from a free stock
-provider, not fabricated "customer photos") until real photography is
-supplied — see `CLAUDE.md`.
+office workers, and none featuring identifiable people (could read as
+fake "staff" photos — see `CLAUDE.md`). Use placeholder imagery (clearly
+sourced from a free stock provider, not fabricated "customer photos")
+until real photography is supplied.
+
+**Implementation:** `components/marketing/CloudinaryImage.tsx` renders a
+free Unsplash stock photo (source URLs in `lib/content/data.ts` —
+`heroImageUrl` and each `productCategory.imageUrl`) through Cloudinary's
+`fetch` delivery type (`lib/cloudinary.ts`), which optimizes format/size
+on the fly with no upload step. Falls back to the abstract
+`PlaceholderVisual` graphic whenever `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`
+isn't set, so a missing/misconfigured Cloudinary account never shows a
+broken image.
+
+**One-time Cloudinary setup** (free tier, no card required):
+1. Sign up at [cloudinary.com](https://cloudinary.com) and note your
+   **Cloud name**, shown at the top of the Console dashboard.
+2. Console → **Settings → Security → Restricted media types** — clear
+   (uncheck) **Fetched URL**. New accounts have remote fetch disabled by
+   default; it won't work until this is unchecked. Optionally set
+   **Allowed fetch domains** to `images.unsplash.com` to limit what your
+   account will proxy.
+3. Put the cloud name in `.env.local` as `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`
+   (see `.env.example`) and restart the dev server.
+
+Swap in real product photography later the same way — upload to
+Cloudinary's media library (or keep using `fetch` against any hosted
+URL) and update the `imageUrl`/`heroImageUrl` values in
+`lib/content/data.ts`.
 
 ## Navigation
 

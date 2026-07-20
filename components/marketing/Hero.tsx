@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/button";
-import { PlaceholderVisual } from "@/components/marketing/PlaceholderVisual";
+import { CloudinaryImage } from "@/components/marketing/CloudinaryImage";
+import { heroImageUrl } from "@/lib/content";
 
 export function Hero() {
   return (
@@ -44,7 +45,14 @@ export function Hero() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
         >
-          <PlaceholderVisual className="aspect-4/3 w-full" />
+          <CloudinaryImage
+            src={heroImageUrl}
+            alt="Interior of an industrial manufacturing facility"
+            className="aspect-4/3 w-full"
+            width={900}
+            height={675}
+            priority
+          />
         </motion.div>
       </Container>
     </div>

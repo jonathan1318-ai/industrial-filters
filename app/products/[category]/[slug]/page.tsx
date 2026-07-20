@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { PageHero } from "@/components/marketing/PageHero";
-import { PlaceholderVisual } from "@/components/marketing/PlaceholderVisual";
+import { CloudinaryImage } from "@/components/marketing/CloudinaryImage";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -56,7 +56,13 @@ export default async function ProductPage({
       <PageHero eyebrow={category.title} title={product.title} />
       <section className="py-16 sm:py-24">
         <Container className="grid gap-12 lg:grid-cols-2">
-          <PlaceholderVisual className="aspect-square w-full" />
+          <CloudinaryImage
+            src={category.imageUrl}
+            alt={`${category.title} — representative product photography`}
+            className="aspect-square w-full"
+            width={800}
+            height={800}
+          />
 
           <div>
             <p className="text-lg text-muted-foreground">

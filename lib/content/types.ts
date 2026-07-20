@@ -15,6 +15,10 @@ export type ProductCategory = {
   slug: string;
   description: string;
   icon: LucideIcon;
+  // Free stock photo URL (Unsplash), delivered via Cloudinary's fetch
+  // transform — see lib/cloudinary.ts. Placeholder imagery, not a real
+  // Firuta product photo; swap when real photography is supplied.
+  imageUrl?: string;
 };
 
 export type ProductSpec = { label: string; value: string };

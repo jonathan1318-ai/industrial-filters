@@ -1,5 +1,6 @@
 export * from "@/lib/content/types";
 export {
+  heroImageUrl,
   industries,
   posts,
   productCategories,

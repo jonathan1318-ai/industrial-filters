@@ -29,42 +29,55 @@ import type {
   Service,
 } from "@/lib/content/types";
 
+// Free Unsplash stock photos (regular license, not Unsplash+), verified
+// reachable, none featuring identifiable people — see CLAUDE.md's "no
+// stock people photos pretending to be staff" rule. Delivered through
+// Cloudinary's fetch transform (lib/cloudinary.ts) once configured.
+export const heroImageUrl =
+  "https://images.unsplash.com/photo-1496247749665-49cf5b1022e9";
+
 export const productCategories: ProductCategory[] = [
   {
     title: "Filter Cartridges",
     slug: "filter-cartridges",
     description: "Pleated and depth cartridges for liquid and gas filtration.",
     icon: Filter,
+    imageUrl: "https://images.unsplash.com/photo-1777118947168-b6e806cb80cf",
   },
   {
     title: "Bag Filters",
     slug: "bag-filters",
     description: "High dirt-holding capacity bag filtration for process fluids.",
     icon: Package,
+    imageUrl: "https://images.unsplash.com/photo-1773270692808-77a84f001cc3",
   },
   {
     title: "Hydraulic Filters",
     slug: "hydraulic-filters",
     description: "Protect hydraulic systems from contamination and wear.",
     icon: Gauge,
+    imageUrl: "https://images.unsplash.com/photo-1698031610511-c7a35d121b17",
   },
   {
     title: "HEPA Filters",
     slug: "hepa-filters",
     description: "High-efficiency particulate filtration for clean environments.",
     icon: ShieldCheck,
+    imageUrl: "https://images.unsplash.com/photo-1436473849883-bb3464c23e93",
   },
   {
     title: "Water Filters",
     slug: "water-filters",
     description: "Filtration systems for process and treated water.",
     icon: Droplets,
+    imageUrl: "https://images.unsplash.com/photo-1705708551758-76b153fa536e",
   },
   {
     title: "Air Filters",
     slug: "air-filters",
     description: "Air filtration for HVAC and industrial ventilation systems.",
     icon: AirVent,
+    imageUrl: "https://images.unsplash.com/photo-1634114581640-9a1734fae3e5",
   },
 ];
 
