@@ -23,6 +23,10 @@
   contact as a working stand-in, not yet official business contact info
   (see `PROJECT.md`). Address and the Google Maps embed are still
   placeholders pending a real business address.
+- Floating WhatsApp button (`components/layout/WhatsAppButton.tsx`) —
+  persistent bottom-right on every page, rendered in the root layout.
+  Self-hides if `lib/contact.ts`'s WhatsApp number ever reverts to a
+  `[PLACEHOLDER]` (no dead floating button).
 - Fully responsive.
 - SEO: metadata, Open Graph, JSON-LD, sitemap.xml, robots.txt on every page
   (see `SEO.md`).

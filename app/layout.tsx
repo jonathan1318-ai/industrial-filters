@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
@@ -62,6 +63,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <WhatsAppButton />
         </MotionConfig>
       </body>
     </html>

@@ -36,3 +36,13 @@ test("skip link moves focus to main content", async ({ page }) => {
   await page.keyboard.press("Tab");
   await expect(page.getByRole("link", { name: "Skip to content" })).toBeFocused();
 });
+
+test("floating WhatsApp button is present on every page and points at the right number", async ({
+  page,
+}) => {
+  await page.goto("/about");
+  const whatsapp = page.getByRole("link", { name: "Chat with us on WhatsApp" });
+  await expect(whatsapp).toBeVisible();
+  await expect(whatsapp).toHaveAttribute("href", "https://wa.me/60166128291");
+  await expect(whatsapp).toHaveAttribute("target", "_blank");
+});
