@@ -427,3 +427,55 @@ suite (23 tests) all pass. Checked visually in the browser in both states
 and Cloudinary configured with the real account (real photos rendering
 correctly across Products, Services, Industries, Blog, About, and Home,
 zero console errors, no accessibility regressions).
+
+### Vercel deployment gotcha: env vars don't travel with git
+
+User deployed to Vercel and reported the Cloudinary photos, then the
+EmailJS quote form, both silently reverting to their "not configured"
+fallback in production despite working locally. Root cause both times was
+the same: `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` and the three
+`NEXT_PUBLIC_EMAILJS_*` vars only ever lived in the local, gitignored
+`.env.local` — never committed, so a fresh Vercel build never saw them.
+Not a code bug; the fallback logic (`isCloudinaryConfigured()` /
+`isEmailJsConfigured()`) behaved exactly as designed by showing a clean
+fallback instead of a broken request. Fix: add the same vars in Vercel's
+Project Settings → Environment Variables, then redeploy (env var changes
+only take effect on a new build). Worth remembering for any future env
+var: it has to be set in every place the app actually runs, not just
+locally.
+
+### Richer, more "futuristic" motion pass
+
+User asked to make the site feel more futuristic using Framer Motion and
+shadcn/ui, while staying inside `CLAUDE.md`'s existing constraints
+("subtle animations only, no glassmorphism, no neon") — so this expands
+motion coverage and adds tasteful micro-interactions rather than changing
+the visual language. Shipped:
+
+- Staggered scroll-reveals (`FadeIn` + index-based delay) on every card
+  grid that didn't already have them: Services, Industries, Blog listing
+  pages, the product-category detail page, the industry page's related
+  products, and `ProductExplorer`'s filtered results — matching the
+  pattern the homepage already used.
+- `app/template.tsx` — a route-level fade/slide-in on every navigation,
+  using the fact that Next remounts `template.tsx` (not `layout.tsx`) per
+  route.
+- Card hover lift (`-translate-y-1` + shadow) plus a subtle image zoom
+  (`scale-[1.04]`, clipped by the card's `overflow-hidden`) on
+  `ProductCard`/`CategoryCard`/`PostCard` and the `PlaceholderVisual`
+  fallback.
+- Button hover lift (`-translate-y-0.5`) on the filled/outline/secondary
+  variants, pairing with the existing press-down feedback.
+- An animated underline on desktop nav links.
+
+The card/button/nav additions are plain CSS transitions (cheaper than
+Framer Motion for effects this simple), so they aren't covered by
+`app/layout.tsx`'s `<MotionConfig reducedMotion="user">`. Added a matching
+`@media (prefers-reduced-motion: reduce)` rule in `app/globals.css` that
+collapses all CSS transition/animation durations, so
+`prefers-reduced-motion` users get the same reduced-motion guarantee for
+both the Framer Motion and the plain-CSS paths. Verified: lint, typecheck,
+build, full unit suite (22 tests), and full e2e suite (23 tests) —
+including the axe-core accessibility sweep with `reducedMotion: "reduce"`
+emulated — all pass. Confirmed the hover/zoom and nav-underline states
+visually via Playwright screenshots against the dev server.

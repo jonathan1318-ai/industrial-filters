@@ -17,7 +17,10 @@ export function PostCard({ post }: { post: Post }) {
   });
 
   return (
-    <Card size="sm" className="overflow-hidden py-0 ring-border transition-shadow hover:shadow-md">
+    <Card
+      size="sm"
+      className="overflow-hidden py-0 ring-border transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
+    >
       <Link
         href={`/blog/${post.slug}`}
         className="group flex flex-col rounded-md focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50"

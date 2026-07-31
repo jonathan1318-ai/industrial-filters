@@ -15,6 +15,7 @@ export function PlaceholderVisual({ className }: { className?: string }) {
       className={cn(
         "relative overflow-hidden rounded-lg bg-primary",
         "bg-[radial-gradient(circle_at_top_right,color-mix(in_oklch,var(--secondary),transparent_60%),transparent_60%)]",
+        "transition-transform duration-500 ease-out group-hover:scale-[1.04]",
         className
       )}
     >

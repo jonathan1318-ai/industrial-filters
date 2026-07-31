@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { ProductCard } from "@/components/marketing/ProductCard";
+import { FadeIn } from "@/components/motion/FadeIn";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/content";
 
@@ -98,12 +99,13 @@ export function ProductExplorer({
 
       {filtered.length > 0 ? (
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((product) => (
-            <ProductCard
-              key={product.slug}
-              product={product}
-              category={categoryBySlug.get(product.categorySlug)}
-            />
+          {filtered.map((product, i) => (
+            <FadeIn key={product.slug} delay={i * 0.05}>
+              <ProductCard
+                product={product}
+                category={categoryBySlug.get(product.categorySlug)}
+              />
+            </FadeIn>
           ))}
         </div>
       ) : (

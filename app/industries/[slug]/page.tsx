@@ -6,6 +6,7 @@ import { Container } from "@/components/layout/Container";
 import { PageHero } from "@/components/marketing/PageHero";
 import { ProductCard } from "@/components/marketing/ProductCard";
 import { Button } from "@/components/ui/button";
+import { FadeIn } from "@/components/motion/FadeIn";
 import {
   getIndustry,
   getIndustryProducts,
@@ -71,12 +72,13 @@ export default async function IndustryPage({
               Relevant products
             </h2>
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {relatedProducts.map((product) => (
-                <ProductCard
-                  key={product.slug}
-                  product={product}
-                  category={getProductCategory(product.categorySlug)}
-                />
+              {relatedProducts.map((product, i) => (
+                <FadeIn key={product.slug} delay={i * 0.06}>
+                  <ProductCard
+                    product={product}
+                    category={getProductCategory(product.categorySlug)}
+                  />
+                </FadeIn>
               ))}
             </div>
           </Container>

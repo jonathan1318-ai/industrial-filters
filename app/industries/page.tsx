@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { PageHero } from "@/components/marketing/PageHero";
 import { CategoryCard } from "@/components/marketing/CategoryCard";
+import { FadeIn } from "@/components/motion/FadeIn";
 import { industries } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -21,15 +22,16 @@ export default function IndustriesPage() {
       <section className="py-16 sm:py-24">
         <Container>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {industries.map((industry) => (
-              <CategoryCard
-                key={industry.slug}
-                title={industry.title}
-                description={industry.summary}
-                icon={industry.icon}
-                href={`/industries/${industry.slug}`}
-                imageUrl={industry.imageUrl}
-              />
+            {industries.map((industry, i) => (
+              <FadeIn key={industry.slug} delay={i * 0.06}>
+                <CategoryCard
+                  title={industry.title}
+                  description={industry.summary}
+                  icon={industry.icon}
+                  href={`/industries/${industry.slug}`}
+                  imageUrl={industry.imageUrl}
+                />
+              </FadeIn>
             ))}
           </div>
         </Container>

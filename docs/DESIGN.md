@@ -120,15 +120,40 @@ info, sitemap links, social links, certifications.
 
 ## Animation
 
-Subtle only: fade/slide-in on scroll (Framer Motion, `whileInView`), hover
-state transitions (150–200ms). No parallax, no auto-playing carousels, no
-attention-grabbing looping animation.
+Subtle but pervasive: fade/slide-in on scroll (Framer Motion, `whileInView`),
+staggered card reveals on every listing grid, hover state transitions
+(150–500ms), a route-level fade/slide on navigation, and small lift/zoom
+micro-interactions on cards, buttons, and nav links. Still no parallax, no
+auto-playing carousels, no attention-grabbing looping animation, no
+glassmorphism/neon — the brief is "premium and alive," not "flashy."
 
-Implemented via `components/motion/FadeIn.tsx` (scroll-triggered, animates
-once) and direct `motion.div` mount animations on `Hero` and `PageHero`.
-`app/layout.tsx` wraps the app in `<MotionConfig reducedMotion="user">`, so
-all of the above is automatically disabled for users with
+- `components/motion/FadeIn.tsx` — scroll-triggered fade + slide-up,
+  animates once. Used with an index-based `delay` (`i * 0.05–0.06`) to
+  stagger every card grid site-wide (homepage, Products/Services/
+  Industries/Blog listings, category/industry detail pages,
+  `ProductExplorer`'s filtered results).
+- `app/template.tsx` — Next.js remounts `template.tsx` on every
+  navigation (unlike `layout.tsx`), so wrapping `{children}` in a
+  `motion.div` gives each route a brief fade + slide-in on entry.
+- Card hover (`ProductCard`/`CategoryCard`/`PostCard`): `-translate-y-1`
+  lift + shadow, plus the thumbnail image scales to `1.04` inside the
+  card's `overflow-hidden` bounds — plain CSS transitions, not Framer
+  Motion, since they're simple enough not to need JS.
+- Button hover: `-translate-y-0.5` lift on the filled/outline/secondary
+  variants (`components/ui/button.tsx`), pairing with the existing
+  `active:translate-y-px` press-down feedback.
+- Nav link hover: an animated underline (`scale-x` on a pseudo-bar),
+  pure CSS, in `components/layout/Navbar.tsx`.
+
+`app/layout.tsx` wraps the app in `<MotionConfig reducedMotion="user">`,
+disabling all Framer Motion animation for users with
 `prefers-reduced-motion` set — don't bypass this when adding new motion.
+The plain-CSS transitions above (card lift, image zoom, nav underline,
+button lift) aren't covered by `MotionConfig`, so `app/globals.css` has a
+matching `@media (prefers-reduced-motion: reduce)` rule that collapses all
+CSS transition/animation durations to near-zero — keep any new
+transform-based CSS transition covered by that rule rather than adding an
+un-gated one.
 
 ## Accessibility
 

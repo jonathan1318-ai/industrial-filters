@@ -26,9 +26,13 @@ export function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
+              className="group relative py-1 text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
             >
               {link.label}
+              <span
+                aria-hidden
+                className="absolute inset-x-0 -bottom-0.5 h-0.5 origin-left scale-x-0 bg-secondary transition-transform duration-300 ease-out group-hover:scale-x-100"
+              />
             </Link>
           ))}
         </nav>

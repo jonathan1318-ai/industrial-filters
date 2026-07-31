@@ -35,7 +35,10 @@ export function CloudinaryImage({
       width={width}
       height={height}
       priority={priority}
-      className={cn("rounded-lg object-cover", className)}
+      className={cn(
+        "rounded-lg object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]",
+        className
+      )}
     />
   );
 }

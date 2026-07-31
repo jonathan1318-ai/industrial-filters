@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/layout/Container";
 import { PageHero } from "@/components/marketing/PageHero";
 import { ProductCard } from "@/components/marketing/ProductCard";
+import { FadeIn } from "@/components/motion/FadeIn";
 import {
   getProductCategory,
   getProductsByCategory,
@@ -52,12 +53,10 @@ export default async function ProductCategoryPage({
         <Container>
           {categoryProducts.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {categoryProducts.map((product) => (
-                <ProductCard
-                  key={product.slug}
-                  product={product}
-                  category={category}
-                />
+              {categoryProducts.map((product, i) => (
+                <FadeIn key={product.slug} delay={i * 0.06}>
+                  <ProductCard product={product} category={category} />
+                </FadeIn>
               ))}
             </div>
           ) : (
